@@ -1,10 +1,13 @@
 from flask import Flask, render_template, request, jsonify
-import openai
+from bardapi import Bard
 
 app = Flask(__name__)
 
-# Setează cheia API de la OpenAI
-openai.api_key = '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'
+# Token-ul pentru API-ul Bard
+BARD_TOKEN = 'fAi7DNpbELeJue9jhdoTbSIElLe3-WLUPfyxp0zpmkinRWewLV7PVk-qOgHPaA-zEquIlg.'
+
+# Inițializarea obiectului Bard
+bard = Bard(token=BARD_TOKEN)
 
 @app.route('/')
 def index():
@@ -14,17 +17,16 @@ def index():
 def send_message():
     user_input = request.json.get('user_input')
 
-    # Trimite întrebarea la ChatGPT folosind cheia de API
     try:
-        response = openai.Completion.create(
-            engine="text-davinci-003",  # Specifică modelul ChatGPT pe care vrei să-l utilizezi
-            prompt=user_input,
-            max_tokens=100  # Numărul maxim de tokeni în răspuns
-        )
-        bot_response = response.choices[0].text.strip()
+        # Trimite întrebarea la Bard folosind token-ul API
+        answer = bard.get_answer(str(user_input))['content']
+        bot_response = answer  # Ajustează în funcție de structura răspunsului obținut
+
+        # Poți face prelucrări suplimentare ale răspunsului aici, dacă este necesar
+
     except Exception as e:
-        # Gestionează eventualele erori de la ChatGPT
-        print("Eroare de la ChatGPT:", e)
+        # Gestionează eventualele erori de la Bard
+        print("Eroare de la Bard:", e)
         bot_response = "A apărut o eroare în timpul procesării cererii."
 
     # Returnează răspunsul bot-ului către client

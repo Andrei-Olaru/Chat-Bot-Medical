@@ -5,141 +5,58 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chatbot Medical</title>
-    <style>
-        body {
-            background-color: #f5f5f5;
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-
-        .container {
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            margin: 50px auto;
-            overflow: hidden;
-            width: 80%;
-            max-width: 600px;
-        }
-
-        h1 {
-            background-color: #4CAF50;
-            color: white;
-            padding: 20px;
-            margin: 0;
-            text-align: center;
-            font-size: 24px;
-        }
-
-        #chat-container {
-            padding: 20px;
-            overflow-y: auto;
-            max-height: 400px;
-        }
-
-        input {
-            width: calc(100% - 40px);
-            padding: 10px;
-            border: none;
-            border-top: 1px solid #ccc;
-            border-bottom: 1px solid #ccc;
-            margin: 0 20px;
-            box-sizing: border-box;
-            outline: none;
-        }
-
-        button {
-            width: 100%;
-            padding: 10px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 0 0 10px 10px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #45a049;
-        }
-        .avatar {
-            width: 24px; /* sau dimensiunea dorită */
-            height: 24px;
-            border-radius: 50%;
-            margin-right: 8px;
-        }
-
-        .message {
-            display: flex;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-
-        .user .avatar {
-            order: 2; /* Schimbă ordinea avatarului utilizatorului și mesajului */
-        }
-
-        .user {
-            justify-content: flex-end;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
     <div class="container">
         <h1>Chatbot Medical</h1>
         <div id="chat-container">
-            <!-- Aici vei afișa conversația cu chatbot-ul -->
+            <!-- Adaugă mesajul de introducere aici -->
+            <div class="bot-message">
+                <p>Bună, sunt MedBot și sunt aici să-ți răspund la orice întrebări medicale ai avea. Te rog să ții cont că dețin doar niște cunoștințe generale și te pot ajuta cu unele sfaturi, însă mereu este indicat să consulți și un medic specializat dacă ai orice fel de problemă medicală.</p>
+            </div>
+            {% for message in chat_messages %}
+                {% if message['sender'] == 'user' %}
+                    <div class="user-message">
+                        <p><strong>{{ current_user.username }}:</strong> {{ message['content'] }}</p>
+                    </div>
+                {% else %}
+                    <div class="chatbot-message">
+                        <p><strong>MedBot:</strong> {{ message['content'] }}</p>
+                    </div>
+                {% endif %}
+            {% endfor %}
         </div>
         <input type="text" id="user-input" placeholder="Introdu întrebarea ta...">
-        <button onclick="sendMessage()">Trimite</button>
+        {% if is_authenticated %}
+            <button onclick="sendMessage()">Trimite</button>
+        {% else %}
+            <div class="container_avertizare">
+                Trebuie să fii autentificat pentru a trimite un mesaj!
+            </div>
+        {% endif %}
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <script>
+                        alert("{{ category }}: {{ message }}");
+                    </script>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
     </div>
 
-    <script>
-        // Funcție pentru adăugarea unui mesaj în containerul de chat
-        function appendMessage(message, sender) {
-            // Obține elementul HTML pentru containerul de chat
-            const chatContainer = document.getElementById('chat-container');
+    {% if is_authenticated %}
+    <div class="greeting-container styled-container">
+        Salut {{ current_user.username }}
+    </div>
+    <a href="{{ url_for('logout') }}" class="logout-button">Logout</a>
+    {% else %}
+        <a href="{{ url_for('login') }}" class="login-button">Login</a>
+        <a href="{{ url_for('register') }}" class="register-button">Register</a>
+    {% endif %}
 
-            // Creează un element <div> pentru mesaj
-            const messageElement = document.createElement('div');
-
-            // Setează clasa mesajului în funcție de expeditor (utilizator sau bot)
-            messageElement.className = sender === 'user' ? 'user-message' : 'bot-message';
-
-            // Setează conținutul textului mesajului
-            messageElement.textContent = message;
-
-            // Adaugă elementul mesajului în containerul de chat
-            chatContainer.appendChild(messageElement);
-        }
-
-        // Funcție pentru a trimite mesajul la server și a afișa răspunsul în containerul de chat
-        function sendMessage() {
-            // Obține valoarea din inputul utilizatorului
-            const userInput = document.getElementById('user-input').value;
-
-            // Verifică dacă există un mesaj de la utilizator
-            if (userInput.trim() !== '') {
-                // Trimite mesajul la server folosind Fetch API
-                fetch('/send_message', {
-                    method: 'POST',  // Metoda HTTP pentru a trimite date la server
-                    headers: {
-                        'Content-Type': 'application/json',  // Specifică tipul de conținut trimis
-                    },
-                    body: JSON.stringify({ user_input: userInput }),  // Convertește obiectul într-un string JSON
-                })
-                .then(response => response.json())  // Parsează răspunsul ca JSON
-                .then(data => {
-                    // Afișează răspunsul de la server în containerul de chat
-                    appendMessage(userInput, 'user');  // Afișează mesajul utilizatorului
-                    appendMessage(data.bot_response, 'bot');  // Afișează răspunsul bot-ului
-                })
-                .catch(error => console.error('Eroare:', error));  // Gestionează eventualele erori
-
-                // Șterge conținutul din input pentru a pregăti utilizatorul pentru un nou mesaj
-                document.getElementById('user-input').value = '';
-            }
-        }
-    </script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>

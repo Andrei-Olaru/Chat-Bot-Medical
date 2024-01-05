@@ -1,0 +1,169 @@
+body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 50px auto;
+            overflow: hidden;
+            width: 80%;
+            max-width: 1000px;
+        }
+
+        h1 {
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px;
+            margin: 0;
+            text-align: center;
+            font-size: 24px;
+        }
+
+        #chat-container {
+            padding: 20px;
+            overflow-y: auto;
+            max-height: 400px;
+        }
+
+        input {
+            width: calc(100% - 40px);
+            padding: 10px;
+            border: none;
+            border-top: 1px solid #ccc;
+            border-bottom: 1px solid #ccc;
+            margin: 0 20px;
+            box-sizing: border-box;
+            outline: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 0 0 10px 10px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+
+        .message {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .login-button,
+        .logout-button,
+        .register-button {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+        }
+
+        .login-button {
+            background-color: #4CAF50;
+            color: white;
+            position: fixed;
+            top: 10px;
+            right: 100px;
+        }
+
+        .logout-button {
+            background-color: #ddd;
+            color: black;
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+        }
+
+        .register-button {
+            background-color: #008CBA;
+            color: white;
+            position: fixed;
+            top: 10px;
+            right: 10px;
+        }
+
+        .register-button:hover {
+            background-color: #005F6B;
+        }
+
+        .login-button:hover,
+        .logout-button:hover,
+        .register-button:hover {
+            transform: scale(1.20); /* Mărește butonul cu 20% la hover */
+        }
+
+        .intro-message {
+            background-color: #dff0d8;
+            border: 1px solid #d6e9c6;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        .intro-message p {
+            margin: 0; /* Elimină marginile pentru a îmbunătăți aspectul */
+        }
+
+        .styled-container {
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #008CBA;
+            color: white;
+            position: fixed;
+            top: 10px;
+            right: 10px;
+        }
+
+        .container_avertizare {
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #ff6f00;
+            color: white;
+            position: absolute;
+            bottom: 200px;
+            width: 80%;
+            max-width: 1000px;
+            text-align: center;
+        }
+
+        .user-message {
+            background-color: #4CAF50; /* Verde pentru mesajul utilizatorului */
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 5px 0;
+            max-width: 70%;
+            align-self: flex-end; /* Aliniază la dreapta */
+        }
+
+        .chatbot-message {
+            background-color: #008CBA; /* Albastru pentru mesajul chatbot-ului */
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 5px 0;
+            max-width: 70%;
+            align-self: flex-start; /* Aliniază la stânga */
+        }

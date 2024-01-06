@@ -43,3 +43,69 @@
                 document.getElementById('user-input').value = '';
             }
         }
+
+
+        document.getElementById("notificationButton").addEventListener("click", function() {
+            var popup = document.getElementById("notificationPopup");
+            popup.classList.toggle("hidden");
+        });
+
+        document.getElementById("subscribeButton").addEventListener("click", function() {
+            var emailInput = document.getElementById("userEmail").value;
+            if (emailInput) {
+                // Ascunde popup-ul
+                var popup = document.getElementById("notificationPopup");
+                popup.classList.add("hidden");
+        
+                // Afișează mesajul de mulțumire
+                var thankYouMessage = document.getElementById("thankYouMessage");
+                thankYouMessage.classList.remove("hidden");
+        
+                // Resetarea valorii din câmpul de email
+                document.getElementById("userEmail").value = "";
+        
+                // Ascunde mesajul de mulțumire după 5 secunde
+                setTimeout(function() {
+                    thankYouMessage.classList.add("hidden");
+                }, 5000); // 5000 milisecunde = 5 secunde
+            }
+        });
+
+        document.getElementById("feedbackButton").addEventListener("click", function() {
+            var modal = document.getElementById("feedbackModal");
+            modal.classList.toggle("hidden");  // Adaugă sau elimină clasa 'hidden' pentru a afișa sau ascunde modalul
+        });
+
+var emojiOptions = document.querySelectorAll(".emoji-option");
+emojiOptions.forEach(function(option) {
+    option.addEventListener("click", function() {
+        var modal = document.getElementById("feedbackModal");
+        modal.classList.add("hidden");
+    });
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+    // Selectează toate butoanele de emoticon
+    const emojiButtons = document.querySelectorAll('.emoji-option');
+
+    // Adaugă un eveniment de clic pentru fiecare buton de emoticon
+    emojiButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            // Ascunde opțiunile de emoticon
+            document.querySelector('.emoji-options').style.display = 'none';
+            
+            // Crează și adaugă pop-up-ul de feedback
+            const popup = document.createElement('div');
+            popup.className = 'feedback-popup';
+            popup.innerHTML = '<i class="fas fa-thumbs-up"></i> Mulțumim pentru feedback!';
+            document.body.appendChild(popup);
+
+            // Șterge pop-up-ul după 2 secunde
+            setTimeout(() => {
+                popup.remove();
+            }, 2000);
+        });
+    });
+});
+
+

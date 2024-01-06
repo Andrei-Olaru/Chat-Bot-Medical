@@ -32,33 +32,29 @@ Acest proiect reprezintă o aplicație web de chat care utilizează Flask pentru
 
 2. **Instalează dependențele folosind pip:**
 
-- bash
-- Copy code
-- pip install -r requirements.txt
-- Configurare:
+   ```bash
+   pip install -r requirements.txt
+
+## Configurare:
 
 3. **Obține un token pentru API-ul Bard și actualizează variabila BARD_TOKEN în app.py cu acesta.**
 
 - Rulează aplicația:
 
-- bash
-- Copy code
-- python app.py
+   ``` bash
+   python app.py
 - Accesează aplicația într-un browser la adresa http://localhost:5000/.
 
-- Comenzi
+## Comenzi
 - Pentru a rula aplicația, utilizează comanda:
 
-- bash
-- Copy code
-- python app.py
+   ```bash
+   python app.py
 
 -Pentru a instala dependențele, utilizează comanda:
+   ```bash
+   - pip install -r requirements.txt
 
-- bash
-- Copy code
-- pip install -r requirements.txt
-- 
-- **Contribuții**
+## Contribuții
 - Contribuțiile sunt binevenite. Dacă ai sugestii de îmbunătățire sau găsești probleme, te rugăm să deschizi un issue sau să trimiți un pull request.
    

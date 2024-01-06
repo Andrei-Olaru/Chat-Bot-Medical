@@ -362,3 +362,24 @@ body {
         .powered-by i {
             margin-left: 5px; /* spațiu mic între text și iconiță */
         }
+
+        #chat-container {
+            width: 80%;
+            margin: auto;
+        }
+
+        .user-message, .bot-message {
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        .user-message {
+            background-color: #3498db;
+            color: #fff;
+        }
+
+        .bot-message {
+            background-color: #ecf0f1;
+            color: #2c3e50;
+        }

@@ -58,8 +58,8 @@
                         <p><strong>{{ current_user.username }}:</strong> {{ message['content'] }}</p>
                     </div>
                 {% else %}
-                    <div class="chatbot-message">
-                        <p><strong>MedBot:</strong> {{ message['content'] }}</p>
+                    <div class="bot-message">
+                        <p>{{ bot_response }}</p>
                     </div>
                 {% endif %}
             {% endfor %}

@@ -3,14 +3,21 @@ from bardapi import Bard
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from user_manager import UserManager
 from uuid import uuid4
+from flask_cors import CORS
+import markdown2
 
 app = Flask(__name__)
+CORS(app)  # Permite cererile din orice sursă
 app.config['SECRET_KEY'] = 'o_cheie_secreta'
 login_manager = LoginManager(app)
 
 # Inițializează UserManager
 user_manager = UserManager()
 
+def format_bot_response(answer):
+    # Converteste raspunsul la formatul Markdown
+    formatted_response = markdown2.markdown(answer)
+    return formatted_response
 
 # Configurează LoginManager pentru a încărca utilizatorii:
 @login_manager.user_loader
@@ -19,7 +26,7 @@ def load_user(user_id):
     return user
 
 # Token-ul pentru API-ul Bard
-BARD_TOKEN = 'your api key.'
+BARD_TOKEN = 'fAi7DDEsHAHbI_UtA9xpXBvsGbOEfMbcdCO_7_eQXpma9dvgG6vuHtEkKiF6hXcHIgIPOA.'
 
 # Inițializarea obiectului Bard
 bard = Bard(token=BARD_TOKEN)
@@ -33,18 +40,18 @@ def send_message():
     user_input = request.json.get('user_input')
 
     try:
-        #Trimite întrebarea la Bard folosind token-ul API
+        # Trimite întrebarea la Bard folosind token-ul API
         answer = bard.get_answer(str(user_input))['content']
-        bot_response = answer  
-
+        # Formatează răspunsul
+        formatted_response = format_bot_response(answer)
 
     except Exception as e:
         # Gestionează eventualele erori de la Bard
-        print("Eroare de la Bard:", e)         
-        bot_response = "A apărut o eroare în timpul procesării cererii."
+        print("Eroare de la Bard:", e)
+        formatted_response = "A apărut o eroare în timpul procesării cererii."
 
-    # Returnează răspunsul bot-ului către client
-    return jsonify({'bot_response': bot_response})
+    # Returnează răspunsul bot-ului formatat către client
+    return jsonify({'bot_response': formatted_response})
 
 # Adauga rute pentru login si logout
 @app.route('/login', methods=['GET', 'POST'])

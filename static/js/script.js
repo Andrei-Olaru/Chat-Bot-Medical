@@ -9,8 +9,8 @@
             // Setează clasa mesajului în funcție de expeditor (utilizator sau bot)
             messageElement.className = sender === 'user' ? 'user-message' : 'bot-message';
 
-            // Setează conținutul textului mesajului
-            messageElement.textContent = message;
+            // Setează conținutul HTML al mesajului
+            messageElement.innerHTML = message;
 
             // Adaugă elementul mesajului în containerul de chat
             chatContainer.appendChild(messageElement);

@@ -25,15 +25,10 @@ class UserManager:
         if username in self.users:
             return False  # Utilizatorul există deja
 
-        # Generare hash pentru parolă
         hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
 
         # Adaugă utilizatorul în dicționar
-        new_user = User(user_id, username, hashed_password)
-        self.users[username] = new_user
-
-        # Afișează parola în terminal
-        print(f"Parola utilizatorului {username} este: {hashed_password}")
+        self.users[username] = User(user_id, username, hashed_password)
 
         return True  # Înregistrare reușită
 
@@ -41,8 +36,10 @@ class UserManager:
         user = self.users.get(username)
 
         if user and user.check_password(password):
+            # print(f"User found: {user.id}")
             return user
         else:
+            # print("User not found or password incorrect.")
             return None
 
     def get_user(self, username):

@@ -67,6 +67,7 @@
         <input type="text" id="user-input" placeholder="Introdu întrebarea ta...">
         {% if is_authenticated %}
             <button onclick="sendMessage()">Trimite</button>
+            <i class="fas fa-circle-notch fa-spin loading-icon" id="loading-icon" style="display: none;"></i>
         {% else %}
             <div class="container_avertizare">
                 Trebuie să fii autentificat pentru a trimite un mesaj!

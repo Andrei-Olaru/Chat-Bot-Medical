@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <style>
+        body {
+            background-color: #f0f8f0; /* verde deschis */
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        form {
+            background-color: #ffffff; /* alb */
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 300px;
+        }
+
+        h1 {
+            color: #008000; /* verde inchis */
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333; /* culoare text */
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+            border: 1px solid #ddd; /* gri deschis */
+            border-radius: 4px;
+            outline: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #008000; /* verde inchis */
+            color: #fff; /* text alb */
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #006400; /* verde mai inchis la hover */
+        }
+
+        .message {
+            margin-top: 16px;
+            color: #333; /* culoare text */
+            text-align: center;
+        }
+
+        .error {
+            color: #ff0000; /* rosu pentru mesaje de eroare */
+        }
+
+        .success {
+            color: #008000; /* verde pentru mesaje de succes */
+        }
+    </style>
+</head>
+<body>
+    <form method="post" action="{{ url_for('register') }}">
+        <h1>Register</h1>
+        <label for="username">Username:</label>
+        <input type="text" name="username" required>
+        <label for="password">Password:</label>
+        <input type="password" name="password" required>
+        <label for="confirm_password">Confirm Password:</label>
+        <input type="password" name="confirm_password" required>
+        <p class="message">Ai deja un cont? <a href="{{ url_for('login') }}">Autentifică-te aici</a>.</p>
+        <button type="submit">Register</button>
+    </form>
+
+    {# Afișează mesajele flash dacă există #}
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="{{ 'message ' + category }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+</body>
+</html>

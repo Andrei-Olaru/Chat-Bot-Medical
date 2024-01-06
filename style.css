@@ -1,0 +1,364 @@
+body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 50px auto;
+            overflow: hidden;
+            width: 80%;
+            max-width: 1000px;
+        }
+
+        h1 {
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px;
+            margin: 0;
+            text-align: center;
+            font-size: 24px;
+        }
+
+        #chat-container {
+            padding: 20px;
+            overflow-y: auto;
+            max-height: 400px;
+        }
+
+        input {
+            width: calc(100% - 40px);
+            padding: 10px;
+            border: none;
+            border-top: 1px solid #ccc;
+            border-bottom: 1px solid #ccc;
+            margin: 0 20px;
+            box-sizing: border-box;
+            outline: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 0 0 10px 10px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+
+        .message {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .login-button,
+        .logout-button,
+        .register-button {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+        }
+
+        .login-button {
+            background-color: #4CAF50;
+            color: white;
+            position: fixed;
+            top: 10px;
+            right: 100px;
+        }
+
+        .logout-button {
+            background-color: #ddd;
+            color: black;
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+        }
+
+        .register-button {
+            background-color: #008CBA;
+            color: white;
+            position: fixed;
+            top: 10px;
+            right: 10px;
+        }
+
+        .register-button:hover {
+            background-color: #005F6B;
+        }
+
+        .login-button:hover,
+        .logout-button:hover,
+        .register-button:hover {
+            transform: scale(1.20); /* Mărește butonul cu 20% la hover */
+        }
+
+        .intro-message {
+            background-color: #dff0d8;
+            border: 1px solid #d6e9c6;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        .intro-message p {
+            margin: 0; /* Elimină marginile pentru a îmbunătăți aspectul */
+        }
+
+        .styled-container {
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #008CBA;
+            color: white;
+            position: fixed;
+            top: 10px;
+            right: 10px;
+        }
+
+        .container_avertizare {
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #ff6f00;
+            color: white;
+            position: absolute;
+            bottom: 200px;
+            width: 80%;
+            max-width: 1000px;
+            text-align: center;
+        }
+
+        .user-message {
+            background-color: #4CAF50; /* Verde pentru mesajul utilizatorului */
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 5px 0;
+            max-width: 70%;
+            align-self: flex-end; /* Aliniază la dreapta */
+        }
+
+        .chatbot-message {
+            background-color: #008CBA; /* Albastru pentru mesajul chatbot-ului */
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 5px 0;
+            max-width: 70%;
+            align-self: flex-start; /* Aliniază la stânga */
+        }
+        
+        .notification-button {
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            background-color: #fff; 
+            border-radius: 50%; /* face butonul să fie un cerc */
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* pentru un aspect umbrit */
+            z-index: 1000; /* butonul este peste toate celelalte elemente */
+        }
+        
+        .notification-button i {
+            font-size: 24px;
+            color: #333; /* culoarea iconiței */
+        }
+        
+        .notification-button:hover {
+            background-color: #f9f9f9; /* o nuanță mai deschisă pentru hover */
+        }
+
+        .notification-popup {
+            position: fixed;
+            bottom: 140px; 
+            right: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            padding: 20px;
+            width: 250px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1001; /* Un nivel mai mare decât butonul pentru a se asigura că este afișat deasupra */
+        }
+        
+        .notification-popup.hidden {
+            display: none;
+        }
+
+        .thank-you-message {
+            position: fixed;
+            bottom: 140px; 
+            right: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            padding: 10px 20px;
+            width: auto; /* Lățimea se va ajusta în funcție de conținut */
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1001; /* Afișează mesajul deasupra altor elemente */
+        }
+        
+        .thank-you-message.hidden {
+            display: none;
+        }
+
+        .feedback-button {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background-color: #fff;
+            border-radius: 25px; /* Rotunjirea colțurilor pentru a avea forma unui buton */
+            padding: 10px 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1001;
+        }
+        
+        .feedback-button i {
+            font-size: 24px;
+            color: #333;
+            margin-right: 10px; /* Spațiu între iconiță și text */
+        }
+        
+        .feedback-button span {
+            font-size: 16px;
+            color: #333;
+        }
+        
+        .feedback-button:hover {
+            background-color: #f9f9f9;
+        }
+
+        .feedback-modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            width: 300px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+            z-index: 1002; /* Se afișează peste alte elemente, dar sub butonul de feedback */
+            display: none;
+        }
+
+        .feedback-modal:not(.hidden) {
+            display: flex; /* afișează modalul când nu are clasa 'hidden' */
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;  
+            max-width: 400px; /* limita de lățime maximă */
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+            z-index: 1002;
+            font-family: 'Times New Roman', serif;
+            color: #333;
+            text-align: center;
+            
+            transition: all 0.3s ease;
+
+            
+        }
+        
+        .feedback-modal h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .emoji-options {
+            display: flex;
+            justify-content: space-between;  /* Asează emoji-urile în centru */
+            
+            gap: 20px;  /* Spațiu între emoji-uri */
+            padding: 20px 0;
+        }
+        
+        .emoji-option {
+            background: #8bf19f;  /* Culoare de fundal pentru butoane */
+            border: none;
+            cursor: pointer;
+            font-size: 24px;
+            padding: 10px 20px;  /* Spațiu în jurul emoji-urilor */
+            border-radius: 10px;  /* Colțuri rotunjite */
+            transition: transform 0.2s ease, background-color 0.2s ease;  /* Adăugarea tranziției pentru culoarea de fundal */
+        }
+        
+        .emoji-option:hover {
+            transform: scale(1.1);  /* Ușor efect de scalare la hover */
+            background-color: #dcdcdc;  /* Culorile mai puternice pentru hover */
+        }
+        
+
+        .close-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            font-size: 24px;
+            color: #aaa;
+        }
+        
+        .close-button:hover {
+            color: #333;
+        }
+
+        .feedback-popup {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 18px;
+        }
+        
+        .feedback-popup i {
+            font-size: 24px;
+        }
+
+        .powered-by {
+            position: fixed;
+            bottom: 10px;
+            right: calc(10px + 3cm); /* Mută textul cu 3 cm mai la stânga */
+            color: #666; /* culoare gri pentru text */
+            padding: 5px 0; /* Reduc spațiul de sus și de jos pentru a lăsa textul să respire */
+        }
+        
+        .powered-by i {
+            margin-left: 5px; /* spațiu mic între text și iconiță */
+        }

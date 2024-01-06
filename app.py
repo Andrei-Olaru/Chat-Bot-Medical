@@ -18,34 +18,33 @@ def load_user(user_id):
     user = user_manager.get_user(user_id)
     return user
 
-# # Token-ul pentru API-ul Bard
-# BARD_TOKEN = 'fAi7DIgknbW1absUwzWFs3d5KReb5oCGhtbzkqAaBZb0-qsi2T999fCDwDRtIBtlJta6CA.'
-#
-# # Inițializarea obiectului Bard
-# bard = Bard(token=BARD_TOKEN)
+# Token-ul pentru API-ul Bard
+BARD_TOKEN = 'your api key.'
+
+# Inițializarea obiectului Bard
+bard = Bard(token=BARD_TOKEN)
 
 @app.route('/')
 def index():
     return render_template('index.html')
 
-# @app.route('/send_message', methods=['POST'])
-# def send_message():
-#     user_input = request.json.get('user_input')
-#
-#     try:
-#         # Trimite întrebarea la Bard folosind token-ul API
-#         answer = bard.get_answer(str(user_input))['content']
-#         bot_response = answer  # Ajustează în funcție de structura răspunsului obținut
-#
-#         # Poți face prelucrări suplimentare ale răspunsului aici, dacă este necesar
-#
-#     except Exception as e:
-#         # Gestionează eventualele erori de la Bard
-#         print("Eroare de la Bard:", e)
-#         bot_response = "A apărut o eroare în timpul procesării cererii."
-#
-#     # Returnează răspunsul bot-ului către client
-#     return jsonify({'bot_response': bot_response})
+@app.route('/send_message', methods=['POST'])
+def send_message():
+    user_input = request.json.get('user_input')
+
+    try:
+        #Trimite întrebarea la Bard folosind token-ul API
+        answer = bard.get_answer(str(user_input))['content']
+        bot_response = answer  
+
+
+    except Exception as e:
+        # Gestionează eventualele erori de la Bard
+        print("Eroare de la Bard:", e)         
+        bot_response = "A apărut o eroare în timpul procesării cererii."
+
+    # Returnează răspunsul bot-ului către client
+    return jsonify({'bot_response': bot_response})
 
 # Adauga rute pentru login si logout
 @app.route('/login', methods=['GET', 'POST'])

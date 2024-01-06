@@ -26,7 +26,7 @@ def load_user(user_id):
     return user
 
 # Token-ul pentru API-ul Bard
-BARD_TOKEN = 'fAi7DDEsHAHbI_UtA9xpXBvsGbOEfMbcdCO_7_eQXpma9dvgG6vuHtEkKiF6hXcHIgIPOA.'
+BARD_TOKEN = 'YOUR_API_KEY'
 
 # Inițializarea obiectului Bard
 bard = Bard(token=BARD_TOKEN)

@@ -53,8 +53,4 @@ Acest proiect reprezintă o aplicație web de chat care utilizează Flask pentru
 
 -Pentru a instala dependențele, utilizează comanda:
    ```bash
-   - pip install -r requirements.txt
-
-## Contribuții
-- Contribuțiile sunt binevenite. Dacă ai sugestii de îmbunătățire sau găsești probleme, te rugăm să deschizi un issue sau să trimiți un pull request.
-   
+   pip install -r requirements.txt

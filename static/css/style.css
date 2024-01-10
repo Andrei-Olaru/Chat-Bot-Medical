@@ -13,7 +13,7 @@ body {
             background-color: #fff;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            margin: 50px auto;
+            margin: 60px auto;
             overflow: hidden;
             width: 80%;
             max-width: 1000px;
@@ -143,8 +143,8 @@ body {
             background-color: #ff6f00;
             color: white;
             position: absolute;
-            bottom: 200px;
-            width: 80%;
+            bottom: 0cm;
+            width: 100%;
             max-width: 1000px;
             text-align: center;
         }
